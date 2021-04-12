@@ -19,12 +19,7 @@ pub async fn index(
     let request_id_header_value = http_request.headers().get("x-request-id");
 
     let request_id = if request_id_header_value.is_some() {
-        String::from(
-            request_id_header_value
-                .unwrap()
-                .to_str()
-                .unwrap_or("".into()),
-        )
+        String::from(request_id_header_value.unwrap().to_str().unwrap_or(""))
     } else {
         Uuid::new_v4().to_string()
     };

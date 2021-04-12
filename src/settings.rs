@@ -11,14 +11,14 @@ pub struct AppOptions {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GraphQLOptions {
+pub struct GraphQlOptions {
     pub playground_enabled: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Settings {
     pub app: AppOptions,
-    pub graphql: GraphQLOptions,
+    pub graphql: GraphQlOptions,
 }
 
 impl Settings {
