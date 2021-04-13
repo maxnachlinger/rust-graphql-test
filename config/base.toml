@@ -1,6 +1,5 @@
 [app]
 listen_address = "0.0.0.0:8080"
-name = "rust-graphql-test"
 
 [graphql]
 playground_enabled = true

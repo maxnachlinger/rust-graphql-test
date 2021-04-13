@@ -18,10 +18,7 @@ async fn main() -> std::io::Result<()> {
     let logger = setup_logger();
 
     let settings = Settings::new(&logger).expect("Could not read settings");
-    let AppOptions {
-        listen_address,
-        name: _,
-    } = settings.app.clone();
+    let AppOptions { listen_address } = settings.app.clone();
 
     // graphQL schema
     let schema = build_schema(AppContext {
