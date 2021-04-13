@@ -1,9 +1,10 @@
-use crate::graphql::{RequestContext, TestSchema};
-use crate::settings::Settings;
 use actix_web::{get, post, web, HttpRequest, HttpResponse, Responder};
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql_actix_web::{Request, Response};
 use uuid::Uuid;
+
+use crate::graphql::{RequestContext, TestSchema};
+use crate::settings::Settings;
 
 #[get("/ecv")]
 pub async fn ecv() -> impl Responder {
@@ -33,18 +34,18 @@ pub async fn index(
 }
 
 #[get("/graphql")]
-pub async fn index_playground(settings: web::Data<Settings>) -> impl Responder {
-    if !settings.graphql.playground_enabled {
-        return HttpResponse::NotFound().finish();
-    }
-
+pub async fn playground() -> impl Responder {
     HttpResponse::Ok()
         .content_type("text/html; charset=utf-8")
         .body(playground_source(GraphQLPlaygroundConfig::new("/graphql")))
 }
 
-pub fn init(cfg: &mut web::ServiceConfig) {
-    cfg.service(ecv);
-    cfg.service(index);
-    cfg.service(index_playground);
+pub fn init(settings: Settings) -> impl Fn(&mut web::ServiceConfig) {
+    move |service_config: &mut web::ServiceConfig| {
+        if settings.graphql.playground_enabled {
+            service_config.service(playground);
+        }
+        service_config.service(ecv);
+        service_config.service(index);
+    }
 }

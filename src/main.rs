@@ -34,7 +34,7 @@ async fn main() -> std::io::Result<()> {
             .data(schema.clone())
             .data(settings.clone())
             .wrap(setup_access_logger(&logger))
-            .configure(routes::init)
+            .configure(routes::init(settings.clone()))
     })
     .bind(listen_address)?
     .system_exit()
