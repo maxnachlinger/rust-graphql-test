@@ -1,10 +1,9 @@
+use crate::graphql::{RequestContext, TestSchema};
+use crate::settings::Settings;
 use actix_web::{get, post, web, HttpRequest, HttpResponse, Responder};
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql_actix_web::{Request, Response};
 use uuid::Uuid;
-
-use crate::graphql::{RequestContext, TestSchema};
-use crate::settings::Settings;
 
 #[get("/ecv")]
 pub async fn ecv() -> impl Responder {

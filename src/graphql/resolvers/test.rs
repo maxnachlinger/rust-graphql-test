@@ -16,8 +16,8 @@ pub struct Test<'a> {
 
 #[Object]
 impl<'a> Test<'a> {
-    async fn message(&self) -> String {
-        "hi!".into()
+    async fn message(&self, message: Option<String>) -> String {
+        message.unwrap_or_else(|| "Hello World!".into())
     }
 
     async fn headers(&self) -> Vec<NameValue> {
