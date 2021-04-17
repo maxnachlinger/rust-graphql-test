@@ -1,13 +1,20 @@
 use crate::graphql::{RequestContext, TestSchema};
 use crate::settings::Settings;
-use actix_web::{get, post, web, HttpRequest, HttpResponse, Responder};
+use actix_web::{get, post, web, Error, HttpRequest, HttpResponse};
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql_actix_web::{Request, Response};
 use uuid::Uuid;
 
 #[get("/ecv")]
-pub async fn ecv() -> impl Responder {
-    HttpResponse::Ok().content_type("text/plain").body("OK")
+pub async fn ecv() -> Result<HttpResponse, Error> {
+    Ok(HttpResponse::Ok().content_type("text/plain").body("OK"))
+}
+
+#[get("/graphql")]
+pub async fn playground() -> Result<HttpResponse, Error> {
+    Ok(HttpResponse::Ok()
+        .content_type("text/html; charset=utf-8")
+        .body(playground_source(GraphQLPlaygroundConfig::new("/graphql"))))
 }
 
 #[post("/graphql")]
@@ -30,13 +37,6 @@ pub async fn index(
         headers: http_request.headers().to_owned(),
     });
     schema.execute(request).await.into()
-}
-
-#[get("/graphql")]
-pub async fn playground() -> impl Responder {
-    HttpResponse::Ok()
-        .content_type("text/html; charset=utf-8")
-        .body(playground_source(GraphQLPlaygroundConfig::new("/graphql")))
 }
 
 pub fn init(settings: Settings) -> impl Fn(&mut web::ServiceConfig) {

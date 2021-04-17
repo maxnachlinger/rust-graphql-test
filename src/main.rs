@@ -26,6 +26,11 @@ async fn main() -> std::io::Result<()> {
         settings: settings.clone(),
     });
 
+    if settings.graphql.playground_enabled {
+        info!(logger, "config"; "playground_url" => format!("http://{}/graphql",
+            &settings.app.listen_address));
+    }
+
     HttpServer::new(move || {
         App::new()
             .data(schema.clone())

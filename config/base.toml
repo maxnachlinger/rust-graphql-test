@@ -1,5 +1,5 @@
 [app]
-listen_address = "0.0.0.0:8080"
+listen_address = "127.0.0.1:8080"
 
 [graphql]
 playground_enabled = true
