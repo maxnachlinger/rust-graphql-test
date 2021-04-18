@@ -26,3 +26,6 @@ actix-rt = "1.1.1"
 
 [profile.release]
 lto = true
+
+[profile.dev]
+split.debuginfo = "unpacked"
