@@ -23,17 +23,25 @@ pub async fn index(
     http_request: HttpRequest,
     gql_request: Request,
 ) -> Response {
-    let request_id_header_value = http_request.headers().get("x-request-id");
+    let traceparent_header_value = http_request.headers().get("traceparent");
 
-    let request_id = if request_id_header_value.is_some() {
-        String::from(request_id_header_value.unwrap().to_str().unwrap_or(""))
+    let traceparent = if traceparent_header_value.is_some() {
+        String::from(traceparent_header_value.unwrap().to_str().unwrap_or(""))
     } else {
         Uuid::new_v4().to_string()
     };
 
     let mut request = gql_request.into_inner();
+
+    // let mut cookies_hash_map: HashMap<String, String> = HashMap::new();
+    // if let Ok(cookies) = http_request.cookies() {
+    //     for cookie in cookies.iter() {
+    //         cookies_hash_map.insert(cookie.name().to_string(), cookie.value().to_string());
+    //     }
+    // }
+
     request = request.data(RequestContext {
-        request_id,
+        traceparent,
         headers: http_request.headers().to_owned(),
     });
     schema.execute(request).await.into()

@@ -10,6 +10,6 @@ pub struct AppContext {
 
 #[derive(Clone)]
 pub struct RequestContext {
-    pub request_id: String,
+    pub traceparent: String,
     pub headers: HeaderMap,
 }
