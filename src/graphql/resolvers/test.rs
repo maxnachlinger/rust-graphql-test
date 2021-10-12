@@ -30,4 +30,15 @@ impl<'a> Test<'a> {
             })
             .collect()
     }
+
+    async fn cookies(&self) -> Vec<NameValue> {
+        self.request_context
+            .cookies_hash_map
+            .iter()
+            .map(|(cookie_name, cookie_value)| NameValue {
+                name: cookie_name.to_string(),
+                value: cookie_value.as_str().into(),
+            })
+            .collect()
+    }
 }

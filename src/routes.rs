@@ -1,8 +1,9 @@
 use crate::graphql::{RequestContext, TestSchema};
 use crate::settings::Settings;
-use actix_web::{get, post, web, Error, HttpRequest, HttpResponse};
+use actix_web::{get, post, web, Error, HttpMessage, HttpRequest, HttpResponse};
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql_actix_web::{Request, Response};
+use std::collections::HashMap;
 use uuid::Uuid;
 
 #[get("/ecv")]
@@ -33,16 +34,17 @@ pub async fn index(
 
     let mut request = gql_request.into_inner();
 
-    // let mut cookies_hash_map: HashMap<String, String> = HashMap::new();
-    // if let Ok(cookies) = http_request.cookies() {
-    //     for cookie in cookies.iter() {
-    //         cookies_hash_map.insert(cookie.name().to_string(), cookie.value().to_string());
-    //     }
-    // }
+    let mut cookies_hash_map: HashMap<String, String> = HashMap::new();
+    if let Ok(cookies) = http_request.cookies() {
+        for cookie in cookies.iter() {
+            cookies_hash_map.insert(cookie.name().to_string(), cookie.value().to_string());
+        }
+    }
 
     request = request.data(RequestContext {
         traceparent,
         headers: http_request.headers().to_owned(),
+        cookies_hash_map,
     });
     schema.execute(request).await.into()
 }
