@@ -26,5 +26,6 @@
 }
 ```
 
-- `headers` - echoes back all headers sent in the request
 - `message` - either returns a default message or echoes back the message value sent.
+- `headers` - echoes back all headers sent in the request
+- `cookies` - echoes back all cookies sent in the request
