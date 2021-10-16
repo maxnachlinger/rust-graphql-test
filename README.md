@@ -18,6 +18,10 @@
       name
       value
     }
+    cookies {
+      name
+      value
+    }
   }
 }
 ```
