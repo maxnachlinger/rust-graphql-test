@@ -408,9 +408,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql"
-version = "2.10.2"
+version = "2.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8a5bb9cdc45035df039132dd466621e6459f9ac378dc2874ded5254f539c616"
+checksum = "28ae17677bc797cffc815be2c922e1ef566a1361ea41fe88f0b794382562cf88"
 dependencies = [
  "async-graphql-derive",
  "async-graphql-parser",
@@ -436,9 +436,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-actix-web"
-version = "2.10.2"
+version = "2.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06b1ebf68ead38a82b84917cdaba13fb3b0282f642c4a3205bfe7737797de328"
+checksum = "4a779e373a2d5849aa520c89163cc40b5873a69970cad1c64bb4c70e8c083199"
 dependencies = [
  "actix",
  "actix-http",
@@ -453,9 +453,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-derive"
-version = "2.10.2"
+version = "2.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99941fdd3b5745f4bd34a3e6b539f6604badd07c15a6a2e915e0e041a09c002e"
+checksum = "749471236c13900103da0a18857afcf863dde1b23ad59e174297015892b2c507"
 dependencies = [
  "Inflector",
  "async-graphql-parser",
@@ -469,9 +469,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-parser"
-version = "2.10.2"
+version = "2.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aee8226c393b6c834665ebaae398fa9936f7c1af48055f55ce7138af6dfc66e3"
+checksum = "9185c4b0302414305bcf3c44f6f3ff7d95579b1bf2e8e86a29abe8c0cb307e21"
 dependencies = [
  "async-graphql-value",
  "pest",
@@ -482,11 +482,12 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-value"
-version = "2.10.2"
+version = "2.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "568d658bca34d74d4bd3101ee44a0cfb343337534b1ce8de5e2776f74b999f27"
+checksum = "7f81c53f8668d6e2634b78e72b0e0d870bdde702a911a3ce24c30981c1be48e1"
 dependencies = [
  "bytes 1.0.1",
+ "indexmap",
  "serde 1.0.130",
  "serde_json",
 ]
@@ -1150,9 +1151,9 @@ dependencies = [
 
 [[package]]
 name = "hashbrown"
-version = "0.9.1"
+version = "0.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d7afe4a420e3fe79967a00898cc1f4db7c8a49a9333a29f8a4bd76a253d5cd04"
+checksum = "ab5ef0d4909ef3724cc8cce6ccc8572c5c817592e9285f5464f8e86f8bd3726e"
 
 [[package]]
 name = "heck"
@@ -1219,12 +1220,13 @@ dependencies = [
 
 [[package]]
 name = "indexmap"
-version = "1.6.2"
+version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "824845a0bf897a9042383849b02c1bc219c2383772efcd5c6f9766fa4b81aef3"
+checksum = "bc633605454125dec4b66843673f01c7df2b89479b32e0ed634e43a91cff62a5"
 dependencies = [
  "autocfg",
  "hashbrown",
+ "serde 1.0.130",
 ]
 
 [[package]]
